@@ -1,4 +1,4 @@
-package org.tsn.app.admin.dto;
+package org.tsn.app.admin.meetings;
 
 import java.util.Date;
 
