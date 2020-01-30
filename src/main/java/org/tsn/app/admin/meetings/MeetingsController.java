@@ -10,12 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/meetings")
 public class MeetingsController {
 
+	private static final String SEND_MEETING_INVITE = "/send-meeting-invite";
+	private static final String CREATE_MEETING 		= "/create-meeting";
+	
 	@Autowired
 	private MeetingService meetingService;
 	
-	@PostMapping("/schedule-ec-meeting")
+	@PostMapping(SEND_MEETING_INVITE)
 	public void scheduleECMeeting(@RequestBody MeetingDTO meetingDTO) {
 		meetingService.sendECMeetingEmail(meetingDTO);
+	}
+	
+	@PostMapping(CREATE_MEETING)
+	public void createMeeting(){
+		
 	}
 
 }

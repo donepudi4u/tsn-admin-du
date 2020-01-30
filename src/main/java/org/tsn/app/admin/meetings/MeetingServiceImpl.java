@@ -34,4 +34,10 @@ public class MeetingServiceImpl implements MeetingService {
 
 	}
 
+	@Override
+	public void createMeeting(CreateMeetingWebDTO createMeetingWebDTO) {
+		
+		
+	}
+
 }
