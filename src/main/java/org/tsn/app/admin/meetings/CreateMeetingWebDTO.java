@@ -1,13 +1,14 @@
 package org.tsn.app.admin.meetings;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CreateMeetingWebDTO {
 
 	private String meetingSubject;
-	private LocalDate meetingStartTime;
-	private LocalDate meetingEndTime;
+	private LocalDateTime meetingStartTime;
+	private LocalDateTime meetingEndTime;
 	private String meetingLocation;
 	private String meetingType;
 	private List<Long> invitees;
@@ -21,19 +22,19 @@ public class CreateMeetingWebDTO {
 		this.meetingSubject = meetingSubject;
 	}
 
-	public LocalDate getMeetingStartTime() {
+	public LocalDateTime getMeetingStartTime() {
 		return meetingStartTime;
 	}
 
-	public void setMeetingStartTime(LocalDate meetingStartTime) {
+	public void setMeetingStartTime(LocalDateTime meetingStartTime) {
 		this.meetingStartTime = meetingStartTime;
 	}
 
-	public LocalDate getMeetingEndTime() {
+	public LocalDateTime getMeetingEndTime() {
 		return meetingEndTime;
 	}
 
-	public void setMeetingEndTime(LocalDate meetingEndTime) {
+	public void setMeetingEndTime(LocalDateTime meetingEndTime) {
 		this.meetingEndTime = meetingEndTime;
 	}
 

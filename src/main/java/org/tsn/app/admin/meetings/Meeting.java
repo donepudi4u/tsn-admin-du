@@ -1,30 +1,31 @@
 package org.tsn.app.admin.meetings;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.tsn.app.admin.base.BaseEntity;
 
 public class Meeting extends BaseEntity {
 
-	private Date meetingStartDateTime;
-	private Date meetingEndDateTime;
+	private LocalDateTime meetingStartDateTime;
+	private LocalDateTime meetingEndDateTime;
 	private String subject;
 	private String meetingAgenda;
 	private String status;
 
-	public Date getMeetingStartDateTime() {
+	public LocalDateTime getMeetingStartDateTime() {
 		return meetingStartDateTime;
 	}
 
-	public void setMeetingStartDateTime(Date meetingStartDateTime) {
+	public void setMeetingStartDateTime(LocalDateTime meetingStartDateTime) {
 		this.meetingStartDateTime = meetingStartDateTime;
 	}
 
-	public Date getMeetingEndDateTime() {
+	public LocalDateTime getMeetingEndDateTime() {
 		return meetingEndDateTime;
 	}
 
-	public void setMeetingEndDateTime(Date meetingEndDateTime) {
+	public void setMeetingEndDateTime(LocalDateTime meetingEndDateTime) {
 		this.meetingEndDateTime = meetingEndDateTime;
 	}
 

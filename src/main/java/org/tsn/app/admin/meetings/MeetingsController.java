@@ -22,7 +22,8 @@ public class MeetingsController {
 	}
 	
 	@PostMapping(CREATE_MEETING)
-	public void createMeeting(){
+	public void createMeeting(@RequestBody CreateMeetingWebDTO meetingWebDTO){
+		meetingService.createMeeting(meetingWebDTO);
 		
 	}
 

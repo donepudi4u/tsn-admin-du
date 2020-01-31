@@ -16,6 +16,13 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Autowired
 	private EmailHelper emailHelper;
+	
+	@Autowired
+	private MeetingRepository repository;
+	
+	
+	@Autowired
+	private MeetingMapper mapper;
 
 	@Override
 	public Boolean sendECMeetingEmail(MeetingDTO meetingDTO) {
@@ -36,8 +43,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public void createMeeting(CreateMeetingWebDTO createMeetingWebDTO) {
-		
-		
+		repository.createMeeting(mapper.map(createMeetingWebDTO));
 	}
 
 }
