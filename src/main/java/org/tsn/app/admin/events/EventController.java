@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/events")
 public class EventController {
@@ -16,6 +19,7 @@ public class EventController {
 	private EventService eventService;
 	
 	@PostMapping(CREATE_EVENT)
+	@ApiOperation(value="Creates a new event.")
 	public void createEvent(@RequestBody CreateEventWebDTO createEventDTO){
 		eventService.createEvent(createEventDTO);
 	}

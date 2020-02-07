@@ -1,0 +1,2 @@
+insert into tsn_evnt(evnt_name, evnt_date, evnt_strt_time ,evnt_end_time , evnt_loc , evnt_crtd_by , evnt_crtd_dt ,evnt_last_updt_by ,evnt_last_uptd_dt ) 
+values(:eventName,:evntDate,:eventStartTime,:eventEndTime,:eventLocation,:eventCreatedBy,timestamp,eventLastUpdatedBy,timestamp)
