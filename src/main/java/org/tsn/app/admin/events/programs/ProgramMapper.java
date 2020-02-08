@@ -27,8 +27,8 @@ public class ProgramMapper {
 	}
 
 	public Program map(ProgramDTO dto) {
-		Program dto = new Program();
+		Program p = new Program();
 
-		return dto;
+		return p;
 	}
 }
