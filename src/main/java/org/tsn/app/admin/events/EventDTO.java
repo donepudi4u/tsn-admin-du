@@ -3,13 +3,16 @@ package org.tsn.app.admin.events;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class EventDTO {
+import org.tsn.app.admin.base.BaseDTO;
+
+public class EventDTO extends BaseDTO {
 	
 	private String eventName;
 	private Date eventDate;
 	private LocalDateTime eventStartDateTime;
 	private LocalDateTime eventEndDateTime;
 	private String LocationAddress;
+	private String status;
 
 	public String getEventName() {
 		return eventName;
@@ -50,5 +53,14 @@ public class EventDTO {
 	public void setLocationAddress(String locationAddress) {
 		LocationAddress = locationAddress;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 
 }

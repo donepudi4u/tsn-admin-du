@@ -1,11 +1,11 @@
 package org.tsn.app.admin.events;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+import org.tsn.app.admin.ApplicationConstants;
 
 @Component
 public class EventMapper {
@@ -20,6 +20,19 @@ public class EventMapper {
 		return event;
 	}
 
+	public Event map(EventDTO dto) {
+		Event event = new Event();
+		event.setId(dto.getId());
+		event.setEventName(dto.getEventName());
+		event.setEventDate(dto.getEventDate());
+		event.setEventStartDateTime(dto.getEventStartDateTime());
+		event.setEventEndDateTime(dto.getEventEndDateTime());
+		event.setLocationAddress(dto.getLocationAddress());
+		event.setEventStatus(dto.getStatus());
+		event.setLastUpdatedUserName(ApplicationConstants.APPLICATION_ID);
+		return event;
+	}
+	
 	public EventDTO map(Event event) {
 		EventDTO dto = new EventDTO();
 		dto.setEventName(event.getEventName());
@@ -30,6 +43,7 @@ public class EventMapper {
 		return dto;
 	}
 
+	
 	public List<EventDTO> map(List<Event> events) {
 
 		if (CollectionUtils.isEmpty(events)) {

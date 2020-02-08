@@ -30,7 +30,7 @@ public class MeetingJDBCRepository extends BaseJDBCRepository implements Meeting
 		ps.addValue("endTime", meeting.getMeetingEndDateTime());
 		ps.addValue("meetingStatus", meeting.getStatus());
 
-		int meetingUpdated = namedParameterJdbcTemplate.update(CREATE_MEETING, ps);
+		namedParameterJdbcTemplate.update(CREATE_MEETING, ps);
 
 	}
 

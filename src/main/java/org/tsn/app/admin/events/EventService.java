@@ -6,6 +6,14 @@ public interface EventService {
 
 	void createEvent(CreateEventWebDTO createEventWebDTO);
 
-	List<EventDTO> findEvents(Boolean includeInActive);
+	List<EventDTO> findEventsByStatus(List<EventStatus> statusList);
+
+	void updateEventStatus(Long eventId, EventStatus status);
+
+	void updateEvent(EventDTO eventDTO);
+
+	EventDTO getEventById(Long eventId);
+	
+	
 	
 }

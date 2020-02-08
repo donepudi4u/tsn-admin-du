@@ -6,5 +6,11 @@ public interface EventRepository {
 
 	void createEvent(Event event);
 
-	List<Event> findEvents(Boolean includeInActive);
+	List<Event> findEvents(List<String> statuses);
+
+	void updateEventStatus(Long eventId, String name);
+
+	void updateEvent(Event event);
+
+	Event getEventById(Long eventId);
 }

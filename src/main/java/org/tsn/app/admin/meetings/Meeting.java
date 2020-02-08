@@ -1,7 +1,6 @@
 package org.tsn.app.admin.meetings;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.tsn.app.admin.base.BaseEntity;
 

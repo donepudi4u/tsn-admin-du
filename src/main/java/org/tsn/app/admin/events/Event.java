@@ -12,6 +12,7 @@ public class Event extends BaseEntity {
 	private LocalDateTime eventStartDateTime;
 	private LocalDateTime eventEndDateTime;
 	private String LocationAddress;
+	private String eventStatus;
 
 	public String getEventName() {
 		return eventName;
@@ -52,5 +53,14 @@ public class Event extends BaseEntity {
 	public void setLocationAddress(String locationAddress) {
 		LocationAddress = locationAddress;
 	}
+
+	public String getEventStatus() {
+		return eventStatus;
+	}
+
+	public void setEventStatus(String eventStatus) {
+		this.eventStatus = eventStatus;
+	}
+	
 
 }
