@@ -12,4 +12,6 @@ public class BaseJDBCRepository {
 	@Autowired
 	public NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+	protected static final String DEFAULT_WHERE = " WHERE 1=1";
+	
 }
