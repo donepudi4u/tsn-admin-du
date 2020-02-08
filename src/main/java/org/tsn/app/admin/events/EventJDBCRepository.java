@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
+import org.tsn.app.admin.ApplicationConstants;
 import org.tsn.app.admin.base.BaseJDBCRepository;
 import org.tsn.app.admin.util.SqlUtil;
 
@@ -19,12 +20,12 @@ public class EventJDBCRepository extends BaseJDBCRepository implements EventRepo
 	private static final String FIND_EVENTS_BASE = "SELECT * FROM TSN.TSN_EVNT";
 	private static final String FIND_EVENTS_BY_STATUS = FIND_EVENTS_BASE + DEFAULT_WHERE + " and evnt_stat in(:status)";
 
-	private static final String UPDATE_EVENT_STATUS_BY_ID = "UPDATE TSN.TSN_EVNT TE SET TE.EVNT_STAT = :eventStatus WHERE TE.EVNT_ID = :eventId";
+	private static final String UPDATE_EVENT_STATUS_BY_ID = "UPDATE TSN.TSN_EVNT TE SET TE.EVNT_STAT = :eventStatus , te.evnt_last_updt_by = :lastUpdatedBy, te.evnt_last_uptd_dt = now() WHERE TE.EVNT_ID = :eventId";
 
 	private static final String UPDATE_EVENT = "update tsn.tsn_evnt te set te.evnt_name = :eventName , te.evnt_date = :eventDate , te.evnt_strt_time = :eventStartTime , te.evnt_end_time = :eventEndTime , te.evnt_loc = :eventLocation ,"
-			+ " te.evnt_last_updt_by = :eventLastUpdatedBy , evnt_stat =:eventStatus where te.evnt_id =:eventId";
+			+ " te.evnt_last_updt_by = :eventLastUpdatedBy , evnt_last_uptd_dt = now() ,evnt_stat =:eventStatus where te.evnt_id =:eventId";
 
-	private static final String GET_EVENT_BY_ID = null;
+	private static final String GET_EVENT_BY_ID = FIND_EVENTS_BASE + DEFAULT_WHERE + " and EVNT_ID = ?";
 
 	@Override
 	public void createEvent(Event event) {
@@ -47,17 +48,23 @@ public class EventJDBCRepository extends BaseJDBCRepository implements EventRepo
 	@Override
 	public List<Event> findEvents(List<String> statuses) {
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-		parameterSource.addValue(":status", statuses);
-		return jdbcTemplate.query(FIND_EVENTS_BY_STATUS, new RowMapper<Event>() {
+		parameterSource.addValue("status", statuses);
+		return namedParameterJdbcTemplate.query(FIND_EVENTS_BY_STATUS, parameterSource, new RowMapper<Event>() {
 
 			@Override
 			public Event mapRow(ResultSet rs, int row) throws SQLException {
 				Event event = new Event();
+				event.setId(rs.getLong("evnt_id"));
+				event.setEventStatus(rs.getString("evnt_stat"));
 				event.setEventName(rs.getString("evnt_name"));
 				event.setEventDate(rs.getDate("evnt_date"));
 				event.setEventStartDateTime(SqlUtil.convertToLocalDateTime(rs.getTimestamp("evnt_strt_time")));
 				event.setEventEndDateTime(SqlUtil.convertToLocalDateTime(rs.getTimestamp("evnt_end_time")));
 				event.setLocationAddress(rs.getString("evnt_loc"));
+				event.setLastUpdatedUserName(rs.getString("evnt_last_updt_by"));
+				event.setLastUpdatedDateTime(SqlUtil.convertToLocalDateTime(rs.getTimestamp("evnt_last_uptd_dt")));
+				event.setCreatedUserName(rs.getString("evnt_crtd_by"));
+				event.setCreatedDateTime(SqlUtil.convertToLocalDateTime(rs.getTimestamp("evnt_crtd_dt")));
 				return event;
 			}
 		});
@@ -68,6 +75,7 @@ public class EventJDBCRepository extends BaseJDBCRepository implements EventRepo
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 		parameterSource.addValue("eventId", eventId);
 		parameterSource.addValue("eventStatus", status);
+		parameterSource.addValue("lastUpdatedBy", ApplicationConstants.APPLICATION_ID);
 
 		namedParameterJdbcTemplate.update(UPDATE_EVENT_STATUS_BY_ID, parameterSource);
 
@@ -93,7 +101,7 @@ public class EventJDBCRepository extends BaseJDBCRepository implements EventRepo
 
 	@Override
 	public Event getEventById(Long eventId) {
-		return jdbcTemplate.queryForObject(GET_EVENT_BY_ID, new RowMapper<Event>() {
+		return jdbcTemplate.queryForObject(GET_EVENT_BY_ID, new Object[]{eventId}, new RowMapper<Event>() {
 
 			@Override
 			public Event mapRow(ResultSet rs, int row) throws SQLException {

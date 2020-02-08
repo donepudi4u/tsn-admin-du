@@ -35,11 +35,16 @@ public class EventMapper {
 	
 	public EventDTO map(Event event) {
 		EventDTO dto = new EventDTO();
+		dto.setId(event.getId());
 		dto.setEventName(event.getEventName());
 		dto.setEventDate(event.getEventDate());
 		dto.setEventStartDateTime(event.getEventStartDateTime());
 		dto.setEventEndDateTime(event.getEventEndDateTime());
 		dto.setLocationAddress(event.getLocationAddress());
+		dto.setCreatedUser(event.getCreatedUserName());
+		dto.setCreatedDateTime(event.getCreatedDateTime());
+		dto.setLastUpdatedUser(event.getLastUpdatedUserName());
+		dto.setLastUpdatedDateTime(event.getLastUpdatedDateTime());
 		return dto;
 	}
 
