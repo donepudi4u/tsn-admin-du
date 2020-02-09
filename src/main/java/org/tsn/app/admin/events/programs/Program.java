@@ -6,6 +6,7 @@ public class Program extends BaseEntity {
 
 	private Long eventId;
 	private String programName;
+	private String status;
 	private Long programCategoryId;
 	private Integer programDurationInMinutes;
 	private Boolean isGroupProgram;
@@ -85,5 +86,14 @@ public class Program extends BaseEntity {
 	public void setProgramOrder(Integer programOrder) {
 		this.programOrder = programOrder;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 
 }
