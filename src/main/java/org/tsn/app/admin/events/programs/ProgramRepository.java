@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ProgramRepository {
 
-	void createProgram(Program program);
+	Long createProgram(Program program);
 
 	List<Program> getAllProgramsByEventId(Long eventId);
 }

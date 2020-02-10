@@ -3,6 +3,8 @@ package org.tsn.app.admin.events.programs;
 import java.util.List;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.tsn.app.admin.base.BaseJDBCRepository;
 
@@ -13,11 +15,11 @@ public class ProgramJDBCRepository extends BaseJDBCRepository implements Program
 			+ " values (:eventId,:programName,:status,:categoryId,:duration,:isGroupProgram,:groupName,:contactName,:contactNumber,:programOrder,now(),:createdUser,:lastUpdatedUser,now())";
 
 	@Override
-	public void createProgram(Program program) {
+	public Long createProgram(Program program) {
 		MapSqlParameterSource parameterSource = buildProgramParameters(program);
-
-		int programId = namedParameterJdbcTemplate.update(CREATE_PROGRAM, parameterSource);
-		System.out.println("program Id created : " + programId);
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		namedParameterJdbcTemplate.update(CREATE_PROGRAM, parameterSource,keyHolder);
+		return (long) keyHolder.getKey();
 	}
 
 	private MapSqlParameterSource buildProgramParameters(Program program) {

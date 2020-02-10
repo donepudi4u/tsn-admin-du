@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tsn.app.admin.events.programs.participants.PartcipantService;
 
 @Service
 public class ProgramServiceImpl implements ProgramService {
@@ -13,10 +14,16 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Autowired
 	private ProgramMapper mapper;
+	
+	@Autowired
+	private PartcipantService participantService;  
 
 	@Override
 	public void createProgram(CreateEventProgramWebDTO programWebDTO) {
-		repository.createProgram(mapper.map(programWebDTO));
+		Long programId = repository.createProgram(mapper.map(programWebDTO));
+		
+		participantService.createParticipant(programId,programWebDTO.getParticipants());
+		
 	}
 
 	@Override

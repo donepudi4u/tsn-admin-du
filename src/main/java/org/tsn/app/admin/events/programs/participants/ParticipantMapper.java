@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ParticipantMapper {
 
-	public Participant map(ParticipantDTO dto) {
+	public Participant map(ParticipantDTO dto,Long programId) {
 		Participant participant = new Participant();
 		participant.setName(dto.getParentName());
 		participant.setAge(dto.getAge());
@@ -16,7 +16,7 @@ public class ParticipantMapper {
 		participant.setContactNumber(dto.getContactNumber());
 		participant.setContactEmail(dto.getContactEmail());
 		participant.setAlternativeNumber(dto.getAlternativeNumber());
-		participant.setProgramId(dto.getProgramId());
+		participant.setProgramId(programId);
 		participant.setParentName(dto.getParentName());
 		participant.setCreatedUserName(dto.getCreatedUser());
 		participant.setLastUpdatedUserName(dto.getLastUpdatedUser());
@@ -24,9 +24,9 @@ public class ParticipantMapper {
 		return participant;
 	}
 
-	public List<Participant> map(List<ParticipantDTO> dtos) {
+	public List<Participant> map(List<ParticipantDTO> dtos,Long programId) {
 		List<Participant> participants = new ArrayList<>();
-		dtos.stream().forEach(dto -> participants.add(map(dto)));
+		dtos.stream().forEach(dto -> participants.add(map(dto,programId)));
 		return participants;
 	}
 

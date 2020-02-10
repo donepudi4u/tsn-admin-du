@@ -3,7 +3,7 @@ package org.tsn.app.admin.events.programs.nominations;
 import java.util.List;
 
 import org.tsn.app.admin.base.BaseDTO;
-import org.tsn.app.admin.events.programs.ParticipantDTO;
+import org.tsn.app.admin.events.programs.participants.ParticipantDTO;
 
 public class CreateProgramNominationWebDTO extends BaseDTO {
 

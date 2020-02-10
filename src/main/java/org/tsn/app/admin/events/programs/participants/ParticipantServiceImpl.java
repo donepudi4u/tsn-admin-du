@@ -15,8 +15,8 @@ public class ParticipantServiceImpl implements PartcipantService {
 	private ParticipantRepository repository;
 	
 	@Override
-	public void createParticipant(List<ParticipantDTO> dtos) {
-		repository.createProgramParticipant(mapper.map(dtos));
+	public void createParticipant(Long programId,List<ParticipantDTO> dtos) {
+		repository.createProgramParticipant(mapper.map(dtos,programId));
 	}
 
 }
