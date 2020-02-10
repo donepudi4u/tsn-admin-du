@@ -16,8 +16,8 @@ public class MasterJDBCRepository extends BaseJDBCRepository implements MasterRe
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
 		paramSource.addValue("categoryName", category.getCategoryName());
-		paramSource.addValue(":lastUpdateUser", category.getLastUpdatedUserName());
-		paramSource.addValue(":createdUser", category.getCreatedUserName());
+		paramSource.addValue("lastUpdateUser", category.getLastUpdatedUserName());
+		paramSource.addValue("createdUser", category.getCreatedUserName());
 
 		int categoryId = namedParameterJdbcTemplate.update(CREATE_PRODUCT_CATEGORY, paramSource);
 		System.out.println("Category Created with Id : " + categoryId);
