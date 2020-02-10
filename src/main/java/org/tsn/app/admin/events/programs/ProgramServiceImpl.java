@@ -21,7 +21,7 @@ public class ProgramServiceImpl implements ProgramService {
 	@Override
 	public void createProgram(CreateEventProgramWebDTO programWebDTO) {
 		Long programId = repository.createProgram(mapper.map(programWebDTO));
-		
+		System.out.println("Program number created : " + programId);
 		participantService.createParticipant(programId,programWebDTO.getParticipants());
 		
 	}

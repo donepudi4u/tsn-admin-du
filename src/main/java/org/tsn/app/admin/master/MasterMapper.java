@@ -6,9 +6,9 @@ import org.tsn.app.admin.ApplicationConstants;
 @Component
 public class MasterMapper {
 
-	public ProgramCategory map(ProgramCategoryDTO dto) {
+	public ProgramCategory map(String name) {
 		ProgramCategory pc = new ProgramCategory();
-		pc.setCategoryName(dto.getCategoryName());
+		pc.setCategoryName(name);
 		pc.setLastUpdatedUserName(ApplicationConstants.APPLICATION_ID);
 		pc.setCreatedUserName(ApplicationConstants.APPLICATION_ID);
 		return pc;

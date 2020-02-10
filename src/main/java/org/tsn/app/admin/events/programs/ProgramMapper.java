@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.tsn.app.admin.ApplicationConstants;
 
 @Component
 public class ProgramMapper {
@@ -21,6 +22,8 @@ public class ProgramMapper {
 		program.setPrimaryContactName(createRequest.getPrimaryContactName());
 		program.setPrimaryContactNumber(createRequest.getPrimaryContactNumber());
 		program.setProgramOrder(createRequest.getProgramOrderInEvent());
+		program.setCreatedUserName(ApplicationConstants.APPLICATION_ID);
+		program.setLastUpdatedUserName(ApplicationConstants.APPLICATION_ID);
 
 		return program;
 	}

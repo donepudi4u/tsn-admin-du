@@ -7,7 +7,7 @@ import org.tsn.app.admin.base.BaseJDBCRepository;
 @Repository
 public class MasterJDBCRepository extends BaseJDBCRepository implements MasterRepository {
 
-	private static final String CREATE_PRODUCT_CATEGORY = " insert into tsn_evnt_prg_ctg pc (ctg_name, crtn_dt, crtn_by, last_uptd_by, last_uptd_dt) "
+	private static final String CREATE_PRODUCT_CATEGORY = " insert into tsn_evnt_prg_ctg (ctg_name, crtn_dt, crtn_by, last_uptd_by, last_uptd_dt) "
 			+ " values (:categoryName,now(),:createdUser,:lastUpdateUser,now()) ";
 
 	@Override
@@ -16,8 +16,8 @@ public class MasterJDBCRepository extends BaseJDBCRepository implements MasterRe
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
 		paramSource.addValue("categoryName", category.getCategoryName());
-		paramSource.addValue(":lastUpdateUser", category.getLastUpdatedUserName());
-		paramSource.addValue(":createdUser", category.getCreatedUserName());
+		paramSource.addValue("lastUpdateUser", category.getLastUpdatedUserName());
+		paramSource.addValue("createdUser", category.getCreatedUserName());
 
 		int categoryId = namedParameterJdbcTemplate.update(CREATE_PRODUCT_CATEGORY, paramSource);
 		System.out.println("Category Created with Id : " + categoryId);

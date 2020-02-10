@@ -17,8 +17,8 @@ public class MasterController {
 
 	@PostMapping(CREATE_PROG_CATEGORY)
 	@ApiOperation(value="creates program category")
-	public ResponseEntity<String> createProgramCategory(ProgramCategoryDTO categoryDTO){
-		service.createProgramCategory(categoryDTO);
+	public ResponseEntity<String> createProgramCategory(String categoryName){
+		service.createProgramCategory(categoryName);
 		return ResponseEntity.ok().body("Created Successfully!!");
 	}
 	

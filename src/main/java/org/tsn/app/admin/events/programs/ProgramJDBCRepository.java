@@ -11,15 +11,17 @@ import org.tsn.app.admin.base.BaseJDBCRepository;
 @Repository
 public class ProgramJDBCRepository extends BaseJDBCRepository implements ProgramRepository {
 
-	private static final String CREATE_PROGRAM = " insert into tsn_evnt_prg (evnt_id, prg_name, prg_ctgy_id, prg_dur_in_min, is_grp_prog, grp_name, prg_prim_cnct_name, prg_prim_cnct_num, prg_evnt_ordr, crtn_dt, crtn_by, last_uptd_by, last_uptd_dt) "
-			+ " values (:eventId,:programName,:status,:categoryId,:duration,:isGroupProgram,:groupName,:contactName,:contactNumber,:programOrder,now(),:createdUser,:lastUpdatedUser,now())";
+	private static final String CREATE_PROGRAM = " insert into tsn_evnt_prg (evnt_id, prg_name,prg_stat,prg_ctgy_id, prg_dur_in_min, is_grp_prog, "
+			+ "grp_name, prg_prim_cnct_name, prg_prim_cnct_num, prg_evnt_ordr, crtn_dt, crtn_by, last_uptd_by, last_uptd_dt) "
+			+ " values (:eventId,:programName,:status,:categoryId,:duration,:isGroupProgram,:groupName,:contactName,:contactNumber,"
+			+ ":programOrder,now(),:createdUser,:lastUpdatedUser,now())";
 
 	@Override
 	public Long createProgram(Program program) {
 		MapSqlParameterSource parameterSource = buildProgramParameters(program);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		namedParameterJdbcTemplate.update(CREATE_PROGRAM, parameterSource,keyHolder);
-		return (long) keyHolder.getKey();
+		return keyHolder.getKey().longValue();
 	}
 
 	private MapSqlParameterSource buildProgramParameters(Program program) {

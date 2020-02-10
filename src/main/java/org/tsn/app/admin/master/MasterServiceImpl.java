@@ -13,9 +13,9 @@ public class MasterServiceImpl implements MasterService {
 	private MasterMapper mapper;
 	
 	@Override
-	public void createProgramCategory(ProgramCategoryDTO categoryDTO) {
+	public void createProgramCategory(String categoryName) {
 
-		repository.createProgramCategory(mapper.map(categoryDTO));
+		repository.createProgramCategory(mapper.map(categoryName));
 	}
 
 }
