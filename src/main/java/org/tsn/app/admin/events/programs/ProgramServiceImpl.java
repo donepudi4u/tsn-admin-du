@@ -33,4 +33,10 @@ public class ProgramServiceImpl implements ProgramService {
 		return mapper.map(programs);
 	}
 
+	@Override
+	public void updateProgram(ProgramDTO programDTO) {
+		repository.updateProgram(mapper.map(programDTO));
+		
+	}
+
 }

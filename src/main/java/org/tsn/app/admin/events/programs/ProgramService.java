@@ -7,6 +7,8 @@ public interface ProgramService {
 	void createProgram(CreateEventProgramWebDTO programWebDTO);
 
 	List<ProgramDTO> getAllProgramsByEventId(Long eventId);
+	
+	void updateProgram(ProgramDTO programDTO); 
 
 	
 }

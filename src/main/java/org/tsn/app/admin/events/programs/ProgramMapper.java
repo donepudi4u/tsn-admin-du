@@ -46,9 +46,20 @@ public class ProgramMapper {
 	}
 
 	public Program map(ProgramDTO dto) {
-		Program p = new Program();
+		Program program = new Program();
 
-		return p;
+		program.setEventId(dto.getEventId());
+		program.setProgramName(dto.getProgramName());
+		program.setStatus(dto.getStatus());
+		program.setProgramCategoryId(dto.getProgramCategoryId());
+		program.setProgramDurationInMinutes(dto.getProgramDurationInMinutes());
+		program.setGroupName(dto.getGroupName());
+		program.setIsGroupProgram(dto.getIsGroupProgram());
+		program.setPrimaryContactName(dto.getPrimaryContactName());
+		program.setPrimaryContactNumber(dto.getPrimaryContactNumber());
+		program.setProgramOrder(dto.getProgramOrder());
+
+		return program;
 	}
 
 	public List<ProgramDTO> map(List<Program> programs) {

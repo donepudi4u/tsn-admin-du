@@ -12,6 +12,11 @@ public class SqlUtil {
 		return timestamp.toLocalDateTime();
 	}
 
+	public static Boolean convertToBoolean(String string) {
+		
+		return null;
+	}
+
 	
 
 }

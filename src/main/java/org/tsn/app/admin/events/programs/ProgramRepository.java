@@ -7,4 +7,6 @@ public interface ProgramRepository {
 	Long createProgram(Program program);
 
 	List<Program> getAllProgramsByEventId(Long eventId);
+
+	void updateProgram(Program program);
 }
