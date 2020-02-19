@@ -8,4 +8,6 @@ public interface MemberRepository {
 
 	void createMember(TSNMember member);
 
+	List<TSNMember> getAllMembersOfCategory(String categoryName);
+
 }

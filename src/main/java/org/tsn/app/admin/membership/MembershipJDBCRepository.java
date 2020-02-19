@@ -25,6 +25,11 @@ public class MembershipJDBCRepository extends BaseJDBCRepository implements Memb
 			+ " inner join tsn_mbr_type tmt on  tm.mbr_type_id = tmt.mbr_type_id"
 			+ " where tm.mbr_id like :searchTerm or tm.mbr_email like :searchTerm or tm.mbr_name like :searchTerm or tm.mbr_cntc_nbr like :searchTerm";
 
+	private static final String GET_MEMBERS_BY_CATEGORY = 
+			"select * from tsn_mbr tm"
+					+ " inner join tsn_mbr_type tmt on  tm.mbr_type_id = tmt.mbr_type_id"
+					+ " where tmt.mbr_type = ? ";
+
 	@Override
 	public void createMember(TSNMember member) {
 		MapSqlParameterSource paramSource = buildParameters(member);
@@ -52,25 +57,33 @@ public class MembershipJDBCRepository extends BaseJDBCRepository implements Memb
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("searchTerm", "%"+searchTerm+"%");
 
-		return namedParameterJdbcTemplate.query(FIND_MEMBER_LIKE, paramSource, new RowMapper<TSNMember>() {
-
-			@Override
-			public TSNMember mapRow(ResultSet rs, int num) throws SQLException {
-				TSNMember member = new TSNMember();
-
-				member.setId(rs.getLong("mbr_id"));
-				member.setName(rs.getString("mbr_name"));
-				member.setMembershipType(rs.getString("mbr_type"));
-				member.seteMail(rs.getString("mbr_email"));
-				member.setContactNumber(rs.getString("mbr_cntc_nbr"));
-				member.setLastUpdatedUserName(rs.getString("last_uptd_by"));
-				member.setCreatedUserName(rs.getString("crtn_by"));
-				member.setCreatedDateTime(SqlUtil.convertToLocalDateTime(rs.getTimestamp("crtn_dt")));
-				member.setLastUpdatedDateTime(SqlUtil.convertToLocalDateTime(rs.getTimestamp("last_uptd_dt")));
-				member.setTsnJoinedDate(SqlUtil.convertToLocalDateTime(rs.getTimestamp("join_dt")));
-
-				return member;
-			}
-		});
+		return namedParameterJdbcTemplate.query(FIND_MEMBER_LIKE, paramSource, new TSNMemberRowMapper());
 	}
+
+	@Override
+	public List<TSNMember> getAllMembersOfCategory(String categoryName) {
+		return jdbcTemplate.query(GET_MEMBERS_BY_CATEGORY, new Object[] { categoryName }, new  TSNMemberRowMapper());
+	}
+	
+	
+	class TSNMemberRowMapper implements RowMapper<TSNMember> {
+
+		@Override
+		public TSNMember mapRow(ResultSet rs, int num) throws SQLException {
+			TSNMember member = new TSNMember();
+
+			member.setId(rs.getLong("mbr_id"));
+			member.setName(rs.getString("mbr_name"));
+			member.setMembershipType(rs.getString("mbr_type"));
+			member.seteMail(rs.getString("mbr_email"));
+			member.setContactNumber(rs.getString("mbr_cntc_nbr"));
+			member.setLastUpdatedUserName(rs.getString("last_uptd_by"));
+			member.setCreatedUserName(rs.getString("crtn_by"));
+			member.setCreatedDateTime(SqlUtil.convertToLocalDateTime(rs.getTimestamp("crtn_dt")));
+			member.setLastUpdatedDateTime(SqlUtil.convertToLocalDateTime(rs.getTimestamp("last_uptd_dt")));
+			member.setTsnJoinedDate(SqlUtil.convertToLocalDateTime(rs.getTimestamp("join_dt")));
+			return member;
+		}
+	}
+	
 }

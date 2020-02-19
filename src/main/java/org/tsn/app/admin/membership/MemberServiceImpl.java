@@ -25,4 +25,19 @@ public class MemberServiceImpl implements MemberService {
 		repository.createMember(mapper.map(memberDTO));
 	}
 
+	@Override
+	public List<TSNMemberDTO> getAllMembersOfCategory(MembershipType category) {
+		return mapper.map(repository.getAllMembersOfCategory(category.name()));
+	}
+
+	@Override
+	public List<TSNMemberDTO> download(MembershipType category) {
+		return null;
+	}
+
+	@Override
+	public List<TSNMemberDTO> upload() {
+		return null;
+	}
+
 }
