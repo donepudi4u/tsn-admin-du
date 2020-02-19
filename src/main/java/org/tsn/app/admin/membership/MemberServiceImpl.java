@@ -30,6 +30,8 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.map(repository.getAllMembersOfCategory(category.name()));
 	}
 
+	
+	
 	@Override
 	public List<TSNMemberDTO> download(MembershipType category) {
 		return null;
@@ -37,6 +39,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<TSNMemberDTO> upload() {
+		
 		return null;
 	}
 
