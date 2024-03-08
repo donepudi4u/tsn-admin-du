@@ -12,10 +12,10 @@ variables:
   azureSubscription: '81fb7122-dbc2-4db5-8338-828391732e0d'
 
   # Web app name
-  webAppName: ''
+  webAppName: 'TSN-Admin-Du'
 
   # Environment name
-  environmentName: ''
+  environmentName: 'dev'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
